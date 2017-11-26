@@ -1,0 +1,24 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kube-hello-world
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: kube-hello-world
+    spec:
+      containers:
+      - name: hello-world-nodejs
+        image: helloworld:1.0.0
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+        livenessProbe:
+          initialDelaySeconds: 2
+          periodSeconds: 5
+          httpGet:
+            path: /healthz
+            port: 3000

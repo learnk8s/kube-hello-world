@@ -10,6 +10,10 @@ app.get('/version', (req, res) => {
   res.send(process.env.VERSION || 'No version')
 })
 
+app.get('/healthz', (req, res) => {
+  res.sendStatus(200)
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
 })
